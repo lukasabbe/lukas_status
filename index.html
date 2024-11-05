@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid of Squares</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="grid-container">
+        <!-- 25 squares to fill the 5x5 grid -->
+        <div class="square">
+            <div class="content">
+                <h1>Trusted Status</h1>
+                <h2 id="trusted">Status: </h2>
+            </div>
+        </div>
+        <div class="square">
+            <div class="content">
+                <h1>Creative Status</h1>
+                <h2 id="creative">Status: </h2>
+            </div>
+        </div>
+        <div class="square">
+            <div class="content">
+                <h1>Parkour Status</h1>
+                <h2 id="parkour">Status: </h2>
+            </div>
+        </div>
+        <div class="square">
+            <div class="content">
+                <h1>Modrinth status</h1>
+                <h2 id="modrinth">Status: </h2>
+            </div>
+        </div>
+        <div class="square">
+            <div class="content">
+                <h1>Total downloads</h1>
+                <h2 id="mod_downloads"></h2>
+            </div>
+        </div>
+        <div class="square">
+            <div class="content">
+                <h1>Total followers</h1>
+                <h2 id="followers"></h2>
+            </div>
+        </div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+    </div>
+    <script>
+        (async () => {
+            document.getElementById('trusted').innerHTML = "Status: Loading...";
+            const json = await getMcServer("trusted.sgc.se");
+            document.getElementById('trusted').innerHTML = "Status: " + (json.online ? "Online" : "Offline");
+        })();
+        (async () => {
+            document.getElementById('creative').innerHTML = "Status: Loading...";
+            const json = await getMcServer("creative.sgc.se");
+            document.getElementById('creative').innerHTML = "Status: " + (json.online ? "Online" : "Offline");
+        })();
+        (async () => {
+            document.getElementById('parkour').innerHTML = "Status: Loading...";
+            const json = await getMcServer("parkour.sgc.se");
+            document.getElementById('parkour').innerHTML = "Status: " + (json.online ? "Online" : "Offline");
+        })();
+        (async () => {
+            document.getElementById('modrinth').innerHTML = "Status: Loading...";
+            await fetch("https://api.modrinth.com/").then(res => res.json());
+            document.getElementById('modrinth').innerHTML = "Status: " + "Online";
+        })();
+        (async () => {
+            document.getElementById('mod_downloads').innerHTML = "Status: Loading...";
+            const json =  await (await fetch("https://api.modrinth.com/v2/user/QCe37V9V/projects")).json();
+            let totalDownloads = 0;
+            let totalFollows = 0;
+            for (const project of json) {
+                totalDownloads += project.downloads;
+                totalFollows += project.followers;
+            }
+            document.getElementById('mod_downloads').innerHTML = totalDownloads;
+            document.getElementById('followers').innerHTML = totalFollows;
+        })();
+
+
+        async function getMcServer (ip){
+            return await (await fetch("https://api.mcsrvstat.us/3/" + ip)).json();
+        }
+    </script>
+</body>
+</html>
