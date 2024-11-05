@@ -47,12 +47,12 @@ body, html {
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(3, 1fr);
         gap: 5px;
-        width: calc(100vw - 15px);
-        height: calc(100vh - 15px);
+        width: calc(100vw - 5px);
+        height: calc(100vh - 5px);
         padding: 5px;
     }
 
     .content {
-        font-size: 16px;
+        font-size: 10px;
     }
 }
