@@ -64,17 +64,17 @@
         (async () => {
             document.getElementById('trusted').innerHTML = "Status: Loading...";
             const json = await getMcServer("trusted.sgc.se");
-            document.getElementById('trusted').innerHTML = "Status: " + (json.online ? "Online" : "Offline");
+            document.getElementById('trusted').innerHTML = "Status: " + (json.online ? "Online" + "<br>Players: "+ json.players.online + "/" + json.players.max : "Offline");
         })();
         (async () => {
             document.getElementById('creative').innerHTML = "Status: Loading...";
             const json = await getMcServer("creative.sgc.se");
-            document.getElementById('creative').innerHTML = "Status: " + (json.online ? "Online" : "Offline");
+            document.getElementById('creative').innerHTML = "Status: " + (json.online ? "Online" + "<br>Players: "+ json.players.online + "/" + json.players.max: "Offline");
         })();
         (async () => {
             document.getElementById('parkour').innerHTML = "Status: Loading...";
             const json = await getMcServer("parkour.sgc.se");
-            document.getElementById('parkour').innerHTML = "Status: " + (json.online ? "Online" : "Offline");
+            document.getElementById('parkour').innerHTML = "Status: " + (json.online ? "Online" + "<br>Players: "+ json.players.online + "/" + json.players.max: "Offline");
         })();
         (async () => {
             document.getElementById('modrinth').innerHTML = "Status: Loading...";
